@@ -4,7 +4,7 @@ var mynum = 4;
 
 Array.Sort(array: numbers);
 
-int index = Array.BinarySearch(numbers, mynum); // جستجوی دودویی عدد مورد نظر
+int index = Array.BinarySearch(numbers, mynum);
 
 if (index >= 0)
 {
