@@ -26,6 +26,6 @@ for (int i = 0; i < split.Length; i++)
     {
         split[i] = replacements[split[i]];
     }
-    string letter = split[i];
-    Console.Write(letter[0]);
+    string letters = split[i];
+    Console.Write(letters[0]);
 }
