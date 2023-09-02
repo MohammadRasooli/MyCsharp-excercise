@@ -2,7 +2,6 @@
             "Dash Yankee Oscar Uniform Dash Sierra One Novamber " +
             "Kilo India Novamber Golf Dash Four Bravo Zero Uniform Seven";
 
-
 string[] split = encryptedMessage.Split(" ");
 
 Dictionary<string, string> replacements = new Dictionary<string, string>
