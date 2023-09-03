@@ -2,6 +2,7 @@
 int totalScream = 2;
 int boy = 1;
 int girl = 1;
+
 for (int i = numbersOfGrandmasDolls; i > 1; i--)
 {
     if (i > boy)
@@ -15,4 +16,5 @@ for (int i = numbersOfGrandmasDolls; i > 1; i--)
         girl = i;
     }
 }
+
 Console.WriteLine(totalScream);
