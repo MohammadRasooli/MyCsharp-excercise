@@ -14,21 +14,21 @@ namespace BestPokerHand
         static string bestHandPoker(int[] ranks, char[] suits)
         {
             if (suits.Count(a => a == suits[0]) == 5)
-                return $"ranks =" + string.Join(",", ranks) + $"\nsuits =" + string.Join(",", suits) + "\nBest Hand ----> Flush";
+                return "ranks = " + string.Join(", ", ranks) + "\nsuits = " + string.Join(", ", suits) + "\nBest Hand ----> Flush";
 
             for (int i = 0; i < ranks.Length; i++)
             {
                 if (ranks.Count(a => a == ranks[i]) >= 3)
-                    return $"ranks =" + string.Join(",", ranks) + $"\nsuits =" + string.Join(",", suits) + "\nBest Hand ----> Three of a Kind";
+                    return "ranks = " + string.Join(", ", ranks) + "\nsuits = " + string.Join(", ", suits) + "\nBest Hand ----> Three of a Kind";
             }
 
             for (int i = 0; i < ranks.Length; i++)
             {
                 if (ranks.Count(a => a == ranks[i]) == 2)
-                    return $"ranks =" + string.Join(",", ranks) + $"\nsuits =" + string.Join(",", suits) + "\nBest Hand ----> Pair";
+                    return "ranks = " + string.Join(", ", ranks) + "\nsuits =" + string.Join(", ", suits) + "\nBest Hand ----> Pair";
             }
 
-            return $"ranks =" + string.Join(",", ranks) + $"\nsuits =" + string.Join(",", suits) + "\nBest Hand ----> High Card";
+            return "ranks = " + string.Join(", ", ranks) + "\nsuits = " + string.Join(", ", suits) + "\nBest Hand ----> High Card";
         }
     }
 }
