@@ -1,4 +1,6 @@
 ﻿using System;
+using Microsoft.VisualBasic;
+
 
 namespace BmiCliVersion
 {
@@ -6,79 +8,99 @@ namespace BmiCliVersion
     {
         static void Main(string[] args)
         {
-            static void invalidCommand()
+            Validation(args, out double height, out double weight);
+            BmiTest(weight, height);
+        }
+
+        static void Error()
+        {
+            Console.WriteLine("Invalid command:(\nUse --helps switch to show help.");
+            Environment.Exit(0);
+        }
+        static void Validation(string[] args, out double height, out double weight)
+        {
+            if (args.Length <= 1 || args[0] != "bmi")
             {
-                Console.WriteLine("Invalid command:(\nUse --helps switch to show help.");
+                Error();
             }
-            static void version()
+
+            height = 0;
+            weight = 0;
+
+            if (args.Length == 5)
             {
-                Console.WriteLine("Current verson is : 1.0");
-            }
-            static void helps()
-            {
-                Console.WriteLine("use these switch to run program :\n--height\t \tYour height (centimeters)\n--weight\t \tYour weight (kilograms)\n--version\t \tshow current version\n--helps\t \t \tshow command list");
-            }
-            static void bmi(double weight, double height)
-            {
-                var bmi = Math.Round(weight / Math.Pow(height / 100, 2));
-                Console.WriteLine($"Your Number BMI is : {bmi}");
-                if (bmi <= 18.4)
+                var firstSwitch = args[1];
+                var firstArg = args[2];
+
+                var seccondSwitch = args[3];
+                var seccondArg = args[4];
+
+                if (firstSwitch == "--weight" && seccondSwitch == "--height")
                 {
-                    Console.WriteLine("Underweight!");
+                    weight = Convert.ToDouble(firstArg);
+                    height = Convert.ToDouble(seccondArg);
                 }
-                else if (bmi >= 18.5 && bmi <= 24.9)
+                else if (firstSwitch == "--height" && seccondSwitch == "--weight")
                 {
-                    Console.WriteLine("Normal");
-                }
-                else if (bmi >= 25 && bmi <= 39.9)
-                {
-                    Console.WriteLine("Overweight");
-                }
-                else if (bmi >= 40)
-                {
-                    Console.WriteLine("Obese");
-                }
-            }
-            if (args.Length == 0)
-            {
-                invalidCommand();
-                Environment.Exit(0);
-            }
-            if (args[0] == "bmi")
-            {
-                if (args[1] == "--helps")
-                {
-                    helps();
-                }
-                else if (args[1] == "--version")
-                {
-                    version();
-                }
-                else if (args[1] == "--height" && args[3] == "--weight")
-                {
-                    var height = Convert.ToDouble(args[2]);
-                    var weight = Convert.ToDouble(args[4]);
-                    bmi(weight, height);
-                }
-                else if (args[1] == "--weight" && args[3] == "--height")
-                {
-                    var height = Convert.ToDouble(args[4]);
-                    var weight = Convert.ToDouble(args[2]);
-                    bmi(weight, height);
-                }
-                else if (args[1] != "--weight" || args[1] != "--height" || args[3] != "--height" || args[3] != "--weight")
-                {
-                    invalidCommand();
+                    height = Convert.ToDouble(firstArg);
+                    weight = Convert.ToDouble(seccondArg);
                 }
                 else
                 {
-                    invalidCommand();
+                    Error();
                 }
             }
             else
             {
-                invalidCommand();
+                if (args.Length >= 3)
+                {
+                    Error();
+                }
+                else if (args[1] == "--helps")
+                {
+                    Console.WriteLine("use these switch to run program :\n--height\t \tYour height (centimeters)\n--weight\t \tYour weight (kilograms)\n--version\t \tshow current version\n--helps\t \t \tshow command list");
+                    Environment.Exit(0);
+                }
+                else if (args[1] == "--version")
+                {
+                    Console.WriteLine("Current verson is : 1.0");
+                    Environment.Exit(0);
+                }
+                else
+                {
+                    Error();
+                }
             }
         }
+        static void BmiTest(double weight, double height)
+        {
+            if (weight == 0 && height == 0)
+            {
+                Error();
+            }
+            height = height / 100;
+            double bmiFormula = Math.Round(weight / (height * height));
+
+            Console.WriteLine($"Your bmi number is : {bmiFormula}");
+
+            if (bmiFormula < 18.5)
+            {
+                Console.WriteLine("Underwight");
+            }
+            else if (bmiFormula >= 18.5 && bmiFormula <= 24.9)
+            {
+                Console.WriteLine("Normal weight");
+            }
+            else if (bmiFormula >= 25 && bmiFormula <= 29.9)
+            {
+                Console.WriteLine("Overweight");
+            }
+            else
+            {
+                Console.WriteLine("Obesity");
+            }
+
+        }
+
     }
 }
